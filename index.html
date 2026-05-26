@@ -1,0 +1,462 @@
+<!-- /* ══════════════════════════════════════════════════════════════════
+Explore What Learning Type is This? Activity
+Introduction to AI 2026
+Designed by Amanda Wilkerson, 2026
+For questions or feedback, contact Amanda at <amanda@rhinicorn.com>
+
+Copyright (C) <2026> <Amanda Wilkerson>
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or 
+  any later version.
+    
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program. If not, see https://www.gnu.org/licenses .
+════════════════════════════════════════════════════════════════════ */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Explore: What Learning Type Is This?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    color: #222;
+    max-width: 7.5in;
+    margin: 0.75in auto;
+    line-height: 1.55;
+    background: #fff;
+  }
+  .course-header {
+    border-bottom: 3px solid #1A4731;
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  .course-header p {
+    margin: 2px 0;
+    font-size: 10.5pt;
+    color: #444;
+  }
+  h1.main-title {
+    font-size: 18pt;
+    color: #1A4731;
+    margin-bottom: 4px;
+  }
+  h1.sub-title {
+    margin-top: 0;
+    font-size: 15pt;
+    color: #5B2D8E;
+  }
+  .badge {
+    display: inline-block;
+    background: #EAF3E8;
+    color: #1A4731;
+    font-size: 9pt;
+    font-weight: bold;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+  .intro-box {
+    background: #EAF3E8;
+    border-left: 4px solid #1A4731;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 11pt;
+    border-radius: 0 6px 6px 0;
+  }
+  .intro-box p { margin: 6px 0; }
+  h2 {
+    font-size: 13pt;
+    color: #5B2D8E;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+  table.ref {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 11pt;
+    margin: 10px 0 24px 0;
+  }
+  table.ref th {
+    background: #1A4731;
+    color: #fff;
+    padding: 8px 14px;
+    text-align: left;
+    font-size: 10.5pt;
+  }
+  table.ref td {
+    border: 1px solid #b0d4bc;
+    padding: 8px 14px;
+    vertical-align: top;
+  }
+  table.ref tr:nth-child(even) td { background: #EAF3E8; }
+  .example-card {
+    border: 1px solid #b0d4bc;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    background: #fff;
+  }
+  .example-num {
+    font-size: 9pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1A4731;
+    margin-bottom: 5px;
+  }
+  .example-text {
+    font-size: 11pt;
+    margin: 0 0 14px 0;
+    line-height: 1.5;
+    color: #222;
+  }
+  .classify-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .classify-btn {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .classify-btn.supervised {
+    background: #EAF3E8;
+    color: #1A4731;
+    border-color: #1A4731;
+  }
+  .classify-btn.unsupervised {
+    background: #F0E8F8;
+    color: #5B2D8E;
+    border-color: #5B2D8E;
+  }
+  .classify-btn.reinforcement {
+    background: #FFF8EC;
+    color: #7A4800;
+    border-color: #C87D00;
+  }
+  .classify-btn.selected.supervised {
+    background: #1A4731;
+    color: #fff;
+  }
+  .classify-btn.selected.unsupervised {
+    background: #5B2D8E;
+    color: #fff;
+  }
+  .classify-btn.selected.reinforcement {
+    background: #C87D00;
+    color: #fff;
+  }
+  .classify-btn:hover:not(.selected) { opacity: 0.75; }
+  .reveal-section {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .reveal-all-btn {
+    background: #5B2D8E;
+    color: #F0E8F8;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 28px;
+    font-size: 11.5pt;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .reveal-all-btn:hover { background: #4a2275; }
+  .answer-key {
+    display: none;
+    margin-top: 24px;
+    border: 1px solid #b0d4bc;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .answer-key-header {
+    background: #1A4731;
+    color: #fff;
+    padding: 10px 18px;
+    font-size: 12pt;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+  }
+  .answer-key-body { padding: 6px 0; }
+  .answer-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 18px;
+    border-bottom: 1px solid #e0ede4;
+    font-size: 11pt;
+  }
+  .answer-row:last-child { border-bottom: none; }
+  .answer-num {
+    font-weight: bold;
+    color: #1A4731;
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+  .answer-tag {
+    display: inline-block;
+    font-size: 9pt;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 118px;
+    text-align: center;
+  }
+  .tag-supervised { background: #1A4731; color: #fff; }
+  .tag-unsupervised { background: #5B2D8E; color: #fff; }
+  .tag-reinforcement { background: #C87D00; color: #fff; }
+  .answer-why { color: #333; line-height: 1.45; }
+  .footer {
+    margin-top: 36px;
+    font-size: 9pt;
+    color: #888;
+    text-align: center;
+    border-top: 1px solid #b0d4bc;
+    padding-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-header">
+  <p><strong>AI Essentials</strong></p>
+  <p>Module 4 &nbsp;|&nbsp; Non-Graded Exploration Activity</p>
+</div>
+
+<h1 class="main-title">Explore: What Learning Type Is This?</h1>
+<h1 class="sub-title">Quick Classification Practice</h1>
+<div class="badge">CLASSIFY &amp; COMPARE &nbsp;|&nbsp; NO SUBMISSION REQUIRED</div>
+
+<div class="intro-box">
+  <p><strong>Purpose:</strong> Not all machine learning systems learn the same way. The type of learning an AI system uses depends on what data is available and what problem it is trying to solve. Recognizing the learning type from a real-world description is a key skill for the Module 4 quiz and the problem classification task in the case study.</p>
+  <p><strong>What to do:</strong> Read each of the 9 AI application descriptions below. For each one, click the button that best matches your classification. When you have worked through all of them, reveal the answer key at the bottom to compare your thinking.</p>
+</div>
+
+<h2>QUICK REFERENCE</h2>
+
+<table class="ref">
+  <tr>
+    <th>Learning Type</th>
+    <th>How It Works</th>
+    <th>Key Signal</th>
+  </tr>
+  <tr>
+    <td><strong>Supervised</strong></td>
+    <td>The model trains on labeled examples (input + correct answer) and learns to predict the correct output for new inputs</td>
+    <td>Training data is already labeled with the right answers</td>
+  </tr>
+  <tr>
+    <td><strong>Unsupervised</strong></td>
+    <td>The model finds patterns, groupings, or structure in data without any labels or predefined categories</td>
+    <td>No labels; the system discovers structure on its own</td>
+  </tr>
+  <tr>
+    <td><strong>Reinforcement</strong></td>
+    <td>An agent learns by taking actions in an environment and receiving rewards for good outcomes and penalties for poor ones</td>
+    <td>Trial and error; feedback comes from the outcome of each action</td>
+  </tr>
+</table>
+
+<h2>CLASSIFY EACH EXAMPLE</h2>
+
+<div class="example-card">
+  <div class="example-num">Example 1</div>
+  <p class="example-text">An email provider trains a spam filter using hundreds of thousands of messages that employees previously flagged as either "spam" or "not spam." The system learns which patterns predict spam and applies that knowledge to new incoming mail.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 1)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 1)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 1)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 2</div>
+  <p class="example-text">A streaming platform analyzes viewing habits across millions of users and automatically discovers natural groupings — such as "binge-watchers of crime dramas" or "weekend documentary viewers" — without anyone defining those categories in advance.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 2)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 2)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 2)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 3</div>
+  <p class="example-text">A game-playing AI starts knowing nothing about chess. It plays millions of games against itself, receiving a positive signal when it wins and a negative signal when it loses, gradually developing strategies that no human programmer explicitly coded.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 3)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 3)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 3)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 4</div>
+  <p class="example-text">A bank trains a loan default model using five years of historical applications. Each record in the training data includes the applicant's financial profile and the known outcome: whether the loan was repaid or defaulted. The model uses this to score new applicants.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 4)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 4)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 4)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 5</div>
+  <p class="example-text">A cybersecurity tool monitors network traffic and builds a model of what "normal" activity looks like. It then flags traffic that deviates significantly from that baseline. The system was never given examples of what an attack looks like.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 5)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 5)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 5)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 6</div>
+  <p class="example-text">A warehouse robot learns to navigate a fulfillment center floor by trial and error. Each time it completes an order pick without a collision or delay, it receives a positive reward. Each slowdown or near-miss reduces its score. Over time it develops efficient routes on its own.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 6)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 6)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 6)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 7</div>
+  <p class="example-text">A radiology tool is trained on 50,000 chest X-rays. Each image in the training set was reviewed by a radiologist and labeled as either "pneumonia present" or "no finding." The model learns to replicate those diagnoses on new, unlabeled images.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 7)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 7)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 7)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 8</div>
+  <p class="example-text">A news aggregation service processes thousands of articles per day and automatically groups them into clusters of related stories. Editors did not define the topics in advance; the system surfaces whatever groupings naturally emerge from the content.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 8)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 8)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 8)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="example-card">
+  <div class="example-num">Example 9</div>
+  <p class="example-text">A video platform's recommendation engine adjusts what it shows each user based on their real-time behavior. Every time a user watches a full video, it treats that as a positive signal. Every skip or early exit is a negative signal. The system continuously updates its strategy to maximize total watch time.</p>
+  <div class="classify-btns">
+    <button class="classify-btn supervised" onclick="select(this, 9)">Supervised</button>
+    <button class="classify-btn unsupervised" onclick="select(this, 9)">Unsupervised</button>
+    <button class="classify-btn reinforcement" onclick="select(this, 9)">Reinforcement</button>
+  </div>
+</div>
+
+<div class="reveal-section">
+  <button class="reveal-all-btn" onclick="revealKey(this)">Reveal Answer Key</button>
+
+  <div class="answer-key" id="answerKey">
+    <div class="answer-key-header">ANSWER KEY</div>
+    <div class="answer-key-body">
+
+      <div class="answer-row">
+        <span class="answer-num">1</span>
+        <span class="answer-tag tag-supervised">Supervised</span>
+        <span class="answer-why">Each training message carries a label ("spam" or "not spam") provided by humans. The model learns to map input patterns to those predefined labels and applies that mapping to new messages.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">2</span>
+        <span class="answer-tag tag-unsupervised">Unsupervised</span>
+        <span class="answer-why">No one defined the viewer categories in advance. The system finds natural groupings within the data entirely on its own, which is the defining characteristic of unsupervised learning.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">3</span>
+        <span class="answer-tag tag-reinforcement">Reinforcement</span>
+        <span class="answer-why">The AI is an agent acting in an environment (the game board). It receives reward signals based on outcomes (win/loss) and uses those signals to improve its strategy over time. No labeled training data is involved.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">4</span>
+        <span class="answer-tag tag-supervised">Supervised</span>
+        <span class="answer-why">The training records each have a known outcome (repaid or defaulted) that serves as the label. The model learns the relationship between financial profiles and those labeled outcomes to predict new cases.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">5</span>
+        <span class="answer-tag tag-unsupervised">Unsupervised</span>
+        <span class="answer-why">The system was never given labeled examples of attacks. Instead, it learns the structure of normal traffic on its own and flags deviations. Anomaly detection without labels is a classic unsupervised application.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">6</span>
+        <span class="answer-tag tag-reinforcement">Reinforcement</span>
+        <span class="answer-why">The robot is an agent that acts (navigates, picks), receives reward or penalty signals based on the outcome of each action, and uses that feedback to improve future decisions. No human-labeled training set is used.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">7</span>
+        <span class="answer-tag tag-supervised">Supervised</span>
+        <span class="answer-why">A radiologist labeled each X-ray before training. Those labels are the ground truth the model learns from. Any time expert-labeled examples drive training, that is supervised learning.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">8</span>
+        <span class="answer-tag tag-unsupervised">Unsupervised</span>
+        <span class="answer-why">Editors did not define the topic categories. The system discovers structure within the articles on its own. Clustering without predefined labels is one of the most common unsupervised learning tasks.</span>
+      </div>
+
+      <div class="answer-row">
+        <span class="answer-num">9</span>
+        <span class="answer-tag tag-reinforcement">Reinforcement</span>
+        <span class="answer-why">The recommendation engine acts (serves a video), observes the user's response (watch vs. skip), and treats that response as a reward signal used to update its strategy. This action-feedback-update loop defines reinforcement learning.</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  AI Essentials &nbsp;|&nbsp; Module 4 Exploration Activity &nbsp;|&nbsp; Non-Graded
+</div>
+
+<script>
+function select(btn, exNum) {
+  var card = btn.closest('.example-card');
+  var btns = card.querySelectorAll('.classify-btn');
+  btns.forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+}
+
+function revealKey(btn) {
+  var key = document.getElementById('answerKey');
+  if (key.style.display === 'block') {
+    key.style.display = 'none';
+    btn.textContent = 'Reveal Answer Key';
+  } else {
+    key.style.display = 'block';
+    btn.textContent = 'Hide Answer Key';
+  }
+}
+</script>
+
+</body>
+</html>
